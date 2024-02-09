@@ -88,7 +88,7 @@ public class TabNavigationServiceTests
         await tabNavigationService.CleanPage(tabbedViewModelMock.Object);
         await tabNavigationService.CleanPage(tabbedViewModelMock.Object);
         //Assert
-        Assert.True(counter == 2);
+        Assert.That(counter, Is.EqualTo(2));
     }
     
     [Test]
@@ -149,9 +149,9 @@ public class TabNavigationServiceTests
         useOnLeaveCounter = true;
         await tabNavigationService.LeavePage(tabbedViewModelMock.Object);
         //Assert
-        Assert.True(counterBeforeTabbedPageLeave == 3);
-        Assert.True(counterOnPageLeave == 1);
-        Assert.True(isCalledFrom2);
+        Assert.That(counterBeforeTabbedPageLeave, Is.EqualTo(3));
+        Assert.That(counterOnPageLeave, Is.EqualTo(1));
+        Assert.That(isCalledFrom2);
     }
 
     [Test]
@@ -194,8 +194,8 @@ public class TabNavigationServiceTests
         await tabNavigationService.Navigate<NavigableRestorableViewModel>();
         await tabNavigationService.Navigate<TestViewModel>();
         //Assert
-        Assert.True(navigateCounter == 1);
-        Assert.True(restoreCounter == 1);
+        Assert.That(navigateCounter, Is.EqualTo(1));
+        Assert.That(restoreCounter, Is.EqualTo(1));
     }
     
     private class NavigableRestorableViewModel : IPreNavigableViewModel, IRestorableViewModel, ITabViewModel

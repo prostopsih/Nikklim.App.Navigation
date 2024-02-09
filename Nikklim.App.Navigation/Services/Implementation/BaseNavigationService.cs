@@ -44,26 +44,26 @@ public abstract class BaseNavigationService
         await Leave(lastView);
     }
 
-    protected void SetViewModelNavigationParameters(object viewModel, object? parameters)
+    protected static void SetViewModelNavigationParameters(object viewModel, object? parameters)
     {
         var interfaceType = viewModel.GetType().GetInterfaces()
             .FirstOrDefault(t => t.IsGenericType &&
                                  t.GetGenericTypeDefinition() == typeof(INavigationParameterizedViewModel<>) &&
                                  t.GetGenericArguments().FirstOrDefault() == parameters?.GetType());
 
-        if (interfaceType != null)
+        if (interfaceType is not null)
         {
             var navigationParametersProperty = interfaceType.GetProperty(nameof(INavigationParameterizedViewModel<DefaultNavigationParameters>.NavigationParameters));
             navigationParametersProperty?.SetValue(viewModel, parameters);
         }
     }
 
-    protected async Task PreNavigate(BindableObject? view)
+    protected static async Task PreNavigate(BindableObject? view)
     {
         await Task.WhenAll(PreNavigateViewModel(view?.BindingContext), PreNavigateView(view));
     }
 
-    private async Task PreNavigateViewModel(object viewModel)
+    private static async Task PreNavigateViewModel(object? viewModel)
     {
         if (viewModel is IPreNavigableViewModel preNavigableViewModel)
         {
@@ -71,7 +71,7 @@ public abstract class BaseNavigationService
         }
     }
     
-    private async Task PreNavigateView(object view)
+    private static async Task PreNavigateView(object? view)
     {
         if (view is IPreNavigableView preNavigableView)
         {
@@ -79,12 +79,12 @@ public abstract class BaseNavigationService
         }
     }
     
-    protected async Task PostNavigate(BindableObject? view)
+    protected static async Task PostNavigate(BindableObject? view)
     {
         await Task.WhenAll(PostNavigateViewModel(view?.BindingContext), PostNavigateView(view));
     }
 
-    private async Task PostNavigateViewModel(object viewModel)
+    private static async Task PostNavigateViewModel(object? viewModel)
     {
         if (viewModel is IPostNavigableViewModel postNavigableViewModel)
         {
@@ -92,7 +92,7 @@ public abstract class BaseNavigationService
         }
     }
     
-    private async Task PostNavigateView(object view)
+    private static async Task PostNavigateView(object? view)
     {
         if (view is IPostNavigableView postNavigableView)
         {
@@ -100,12 +100,12 @@ public abstract class BaseNavigationService
         }
     }
     
-    protected async Task Restore(BindableObject? view)
+    protected static async Task Restore(BindableObject? view)
     {
         await Task.WhenAll(RestoreViewModel(view?.BindingContext), RestoreView(view));
     }
 
-    private async Task RestoreViewModel(object viewModel)
+    private static async Task RestoreViewModel(object? viewModel)
     {
         if (viewModel is IRestorableViewModel restorableViewModel)
         {
@@ -113,7 +113,7 @@ public abstract class BaseNavigationService
         }
     }
     
-    private async Task RestoreView(object view)
+    private static async Task RestoreView(object? view)
     {
         if (view is IRestorableView restorableView)
         {
@@ -121,12 +121,12 @@ public abstract class BaseNavigationService
         }
     }
     
-    protected async Task Leave(BindableObject? view)
+    protected static async Task Leave(BindableObject? view)
     {
         await Task.WhenAll(LeaveViewModel(view?.BindingContext), LeaveView(view));
     }
 
-    private async Task LeaveViewModel(object viewModel)
+    private static async Task LeaveViewModel(object? viewModel)
     {
         if (viewModel is ILeaveableViewModel leaveableViewModel)
         {
@@ -134,7 +134,7 @@ public abstract class BaseNavigationService
         }
     }
     
-    private async Task LeaveView(object view)
+    private static async Task LeaveView(object? view)
     {
         if (view is ILeaveableView leaveableView)
         {
@@ -142,13 +142,13 @@ public abstract class BaseNavigationService
         }
     }
     
-    protected Func<Task> GetCleanFunc(BindableObject? view)
+    protected static Func<Task> GetCleanFunc(BindableObject? view)
     {
         object? viewModel = view?.BindingContext;
         return () => Task.WhenAll(CleanViewModel(viewModel), CleanView(view));
     }
 
-    private async Task CleanViewModel(object viewModel)
+    private static async Task CleanViewModel(object? viewModel)
     {
         if (viewModel is ICleanableViewModel cleanableViewModel)
         {
@@ -156,7 +156,7 @@ public abstract class BaseNavigationService
         }
     }
     
-    private async Task CleanView(object view)
+    private static async Task CleanView(object? view)
     {
         if (view is ICleanableView cleanableView)
         {

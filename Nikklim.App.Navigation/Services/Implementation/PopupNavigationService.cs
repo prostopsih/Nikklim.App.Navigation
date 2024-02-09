@@ -38,7 +38,7 @@ public class PopupNavigationService : BaseNavigationService, IPopupNavigationSer
     {
         await MainThreadExtensions.InvokeOnMainThreadAsync(async () =>
         {
-            if (_popupNavigation.PopupStack == null || _popupNavigation.PopupStack.Count == 0)
+            if (_popupNavigation.PopupStack.Count == 0)
             {
                 return;
             }
@@ -58,7 +58,7 @@ public class PopupNavigationService : BaseNavigationService, IPopupNavigationSer
     {
         await MainThreadExtensions.InvokeOnMainThreadAsync(async () =>
         {
-            if (_popupNavigation.PopupStack == null || _popupNavigation.PopupStack.Count == 0)
+            if (_popupNavigation.PopupStack.Count == 0)
             {
                 return;
             }

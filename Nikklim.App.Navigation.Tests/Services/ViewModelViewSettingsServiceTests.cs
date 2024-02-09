@@ -21,8 +21,8 @@ namespace Nikklim.App.Navigation.Tests.Services
             viewModelViewSettingsService.Register<TestView, TestViewModel>();
             ViewModelViewResponse response = viewModelViewSettingsService.GetByViewModel<TestViewModel>();
             //Assert
-            Assert.True(response.View == typeof(TestView));
-            Assert.True(response.ViewModel == typeof(TestViewModel));
+            Assert.That(response.View, Is.EqualTo(typeof(TestView)));
+            Assert.That(response.ViewModel, Is.EqualTo(typeof(TestViewModel)));
         }
 
         [Test]
@@ -34,8 +34,8 @@ namespace Nikklim.App.Navigation.Tests.Services
             viewModelViewSettingsService.Register<TestView, TestViewModel>();
             ViewModelViewResponse response = viewModelViewSettingsService.GetByView<TestView>();
             //Assert
-            Assert.True(response.View == typeof(TestView));
-            Assert.True(response.ViewModel == typeof(TestViewModel));
+            Assert.That(response.View, Is.EqualTo(typeof(TestView)));
+            Assert.That(response.ViewModel, Is.EqualTo(typeof(TestViewModel)));
         }
 
         [Test]

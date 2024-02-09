@@ -1,8 +1,7 @@
-﻿using System.Diagnostics.CodeAnalysis;
+﻿using Microsoft.Maui.Controls;
 
 namespace Nikklim.App.Navigation.Services.Implementation;
 
-[ExcludeFromCodeCoverage]
 public class MainPageNavigation : INavigation
 {
     private INavigation Navigation

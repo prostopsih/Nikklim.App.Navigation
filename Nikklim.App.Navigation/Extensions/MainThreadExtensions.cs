@@ -1,4 +1,6 @@
-﻿namespace Nikklim.App.Navigation.Extensions;
+﻿using Microsoft.Maui.ApplicationModel;
+
+namespace Nikklim.App.Navigation.Extensions;
 
 internal static class MainThreadExtensions
 {
